@@ -7,7 +7,6 @@ from typing import Any
 
 import numpy as np
 
-from beepcopy.models import AudioSegment
 from beepcopy.output import play, write_wav
 from beepcopy.renderers import BaseRenderer
 from beepcopy.renderers.retro import RetroRenderer

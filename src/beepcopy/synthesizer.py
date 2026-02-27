@@ -31,6 +31,8 @@ def generate_waveform(
         case WaveShape.NOISE:
             rng = np.random.default_rng()
             return rng.uniform(-1.0, 1.0, num_samples)
+        case _:
+            raise ValueError(f"Unsupported wave shape: {shape}")
 
 
 def _apply_envelope(samples: np.ndarray, sample_rate: int) -> np.ndarray:

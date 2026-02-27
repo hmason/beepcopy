@@ -65,7 +65,7 @@ class RetroRenderer(BaseRenderer):
                 base = _ENTER_FREQ
             case NodeEvent.EXIT:
                 base = _EXIT_FREQ
-            case NodeEvent.LEAF:
+            case _:
                 base = _BASE_FREQ
 
         # Depth lowers pitch: each level drops by a musical third (~1.26x)

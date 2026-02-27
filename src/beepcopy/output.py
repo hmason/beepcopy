@@ -2,12 +2,12 @@
 
 from __future__ import annotations
 
-import struct
+import atexit
+import os
 import tempfile
 import threading
 import wave
 from collections.abc import Callable
-from pathlib import Path
 
 import numpy as np
 
@@ -52,6 +52,14 @@ def _play_system(buffer: np.ndarray, sample_rate: int) -> None:
     with tempfile.NamedTemporaryFile(suffix=".wav", delete=False) as f:
         tmp_path = f.name
     write_wav(buffer, tmp_path, sample_rate=sample_rate)
+
+    def _cleanup() -> None:
+        try:
+            os.unlink(tmp_path)
+        except OSError:
+            pass
+
+    atexit.register(_cleanup)
 
     if sys.platform == "darwin":
         subprocess.Popen(["afplay", tmp_path])
